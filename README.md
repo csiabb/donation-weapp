@@ -30,7 +30,7 @@ npm build:swan
 npm build:tt
 npm build:my
 
-# 生成 bundle 分析报告
+# 生成 build 分析报告
 npm run build --report
 ```
 
