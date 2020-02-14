@@ -1,3 +1,9 @@
+/*
+Copyright Arxan Chain Ltd. 2020 All Rights Reserved.
+
+SPDX-License-Identifier: Apache-2.0
+*/
+
 var chalk = require('chalk')
 var semver = require('semver')
 var packageConfig = require('../package.json')

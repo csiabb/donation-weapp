@@ -1,3 +1,9 @@
+/*
+Copyright Arxan Chain Ltd. 2020 All Rights Reserved.
+
+SPDX-License-Identifier: Apache-2.0
+*/
+
 require('./check-versions')()
 
 process.env.PLATFORM = process.argv[process.argv.length - 1] || 'wx'
