@@ -1,4 +1,5 @@
 <script>
+import store from '@/store'
 export default {
   created () {
     // 调用API从本地缓存中获取数据
@@ -23,6 +24,10 @@ export default {
       logs.unshift(Date.now())
       mpvue.setStorageSync('logs', logs)
     }
+    // tabBar配置
+    wx.hideTabBar()
+    // 获取系统信息，适配iphoneX
+    store.dispatch('settings/getSystemInfo')
   },
   log () {
     console.log(`log at:${Date.now()}`)
