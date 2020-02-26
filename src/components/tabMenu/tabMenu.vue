@@ -1,7 +1,12 @@
 <template>
   <ul class="tabMenu">
-    <li v-for="item in tabList" v-bind:key="item" :class="active === index ? 'active' : ''" @click='onTabChange(index)'>
-      {{active}}
+    <li
+      v-for="item in tabList"
+      v-bind:key="item"
+      :class="active === index ? 'active' : ''"
+      @click="onTabChange(index)"
+    >
+      {{item}}
       <div class="active_line" />
     </li>
   </ul>
@@ -35,7 +40,6 @@ export default {
   },
   watch: {
     current (newCurrent) {
-      console.log(newCurrent)
       this.active = newCurrent
     }
   },
@@ -62,20 +66,31 @@ $tabMenuColor: #888;
   background-color: $tabbar-background-color;
 
   > li {
+    display: block;
     color: $tabMenuColor;
     font-weight: 500;
     font-size: 30rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    position: relative;
 
     > .active_line {
       width: 50rpx;
       height: 6rpx;
-      background-color: $active-text-color;
+      left: 50%;
+
+      background-color: transparent;
       margin: 0 auto;
       margin-top: 4rpx;
-      display: none;
+      margin-left: -25rpx;
+      position: absolute;
+      bottom: 0;
     }
-    &.active > .active_line {
-      display: block;
+    &.active{
+      color: $active-text-color;
+      > .active_line {
+      background-color: $active-text-color;
+    }
     }
   }
 }
