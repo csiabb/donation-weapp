@@ -5,21 +5,39 @@
     :current='current'
     @onTabChange='onTabMenuChange'
   ></tab-menu>
-  <div>{{tabContent}}</div>
+  <div class="table_container">
+    <table-component
+      :headers='headers'
+      :content='content'
+    ></table-component>
+  </div>
+  
   </div>
 </template>
 
 <script>
 import tabMenu from '@/components/tabMenu/tabMenu'
+import table from '@/components/table/table'
+
 export default {
   components: {
-    tabMenu
+    'tab-menu': tabMenu,
+    'table-component': table
   },
   data () {
     return {
       current: 0,
       tabContent: null,
-      tabList: ['已收物品', '已收资金', '已分发物品', '已分发资金']
+      tabList: ['已收物品', '已收资金', '已分发物品', '已分发资金'],
+      headers: ['分发者', '物资', '数量', '受赠者', '公示时间'],
+      content: [
+        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
+        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
+        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
+        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
+        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
+        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26']
+      ]
     }
   },
   mounted () {
@@ -37,3 +55,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.table_container{
+  display: block;
+  width: 100vw;
+  overflow-y: scroll;
+  margin-left: 30rpx;
+}
+</style>

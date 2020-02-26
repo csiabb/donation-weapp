@@ -1,5 +1,5 @@
 <template>
-  <ul class="tabMenu">
+  <ul class="tabMenu_component">
     <li
       v-for="item in tabList"
       v-bind:key="item"
@@ -23,10 +23,6 @@ export default {
       type: [String],
       required: true
     }
-    // onTabChange: {
-    //   type: Function,
-    //   required: false
-    // }
   },
   data () {
     return {
@@ -39,15 +35,9 @@ export default {
     }
   },
   watch: {
-    current (newCurrent) {
-      this.active = newCurrent
+    current (_current) {
+      this.active = _current
     }
-  },
-  created () {
-    console.log('Created')
-  },
-  beforeUpdate () {
-    console.log('beforeUpdate', this)
   }
 }
 </script>
@@ -57,13 +47,14 @@ export default {
 
 $tabMenuColor: #888;
 
-.tabMenu {
+.tabMenu_component {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 30rpx;
   height: 70rpx;
   background-color: $tabbar-background-color;
+
 
   > li {
     display: block;
