@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/home/main",
-    "pages/mine/main"
+    "pages/mine/main",
+    "pages/organList/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

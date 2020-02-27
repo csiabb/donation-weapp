@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <div class="header-container">
-      <cell-list txt="公益机构" link="/pages/mine/main"/>
+      <cell-list txt="公益机构" link="/pages/organList/main"/>
     </div>
     <scroll-view scroll-x="true" bindscroll="scroll" style="width: 100%">
       <div class="organization-container" >
@@ -26,8 +26,6 @@
 <script>
 import tabBar from '@/components/tabbar/tabBar'
 import organCard from '@/components/card/organCard'
-import organCardLeft from '@/components/card/organCardLeft'
-import organCardCenter from '@/components/card/organCardCenter'
 import cellList from '@/components/cell/cellList'
 import space from '@/components/space/space'
 
@@ -35,8 +33,6 @@ export default {
   components: {
     tabBar,
     organCard,
-    organCardLeft,
-    organCardCenter,
     cellList,
     space
   },
