@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/publicDisplayDetail/main",
     "pages/home/main",
-    "pages/mine/main"
+    "pages/mine/main",
+    "pages/publicDisplayDetail/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
