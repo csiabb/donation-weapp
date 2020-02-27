@@ -30,14 +30,7 @@ export default {
       tabContent: null,
       tabList: ['已收物品', '已收资金', '已分发物品', '已分发资金'],
       headers: ['分发者', '物资', '数量', '受赠者', '公示时间'],
-      content: [
-        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
-        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
-        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
-        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
-        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
-        ['周杰伦', '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26']
-      ]
+      content: []
     }
   },
   mounted () {
@@ -49,8 +42,19 @@ export default {
       this.renderTableByCurrent()
     },
     renderTableByCurrent () {
-      const {tabList, current} = this
-      this.tabContent = tabList[current]
+      const {current, tabList} = this
+
+      let content = []
+      switch (current) {
+        case 0:
+        default:
+          content = [
+            [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
+            [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26']
+          ]
+          break
+      }
+      this.content = content
     }
   }
 }
