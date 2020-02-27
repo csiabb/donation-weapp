@@ -24,8 +24,6 @@ export default {
       logs.unshift(Date.now())
       mpvue.setStorageSync('logs', logs)
     }
-    // tabBar配置
-    wx.hideTabBar()
     // 获取系统信息，适配iphoneX
     store.dispatch('settings/getSystemInfo')
   },
