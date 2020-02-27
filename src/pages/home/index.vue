@@ -1,16 +1,95 @@
 <template>
   <div class="home-container">
-    <div>主页</div>
+    <scroll-view scroll-x="true" bindscroll="scroll" style="width: 100%">
+      <div class="organization-container" >
+        <div 
+          class="item"
+          v-for="(item, index) in list"
+          :index="index"
+          :key="index"
+        >
+          <organ-card :info="item" />
+        </div>
+      </div>
+    </scroll-view>
+    <organ-card-left type="icon-left" :info="organ" />
+    <organ-card-center type="icon-center" :info="organ" />
     <tab-bar :selectNavIndex="0"></tab-bar>
   </div>
 </template>
 
 <script>
 import tabBar from '@/components/tabbar/tabBar'
+import organCard from '@/components/card/organCard'
+import organCardLeft from '@/components/card/organCardLeft'
+import organCardCenter from '@/components/card/organCardCenter'
 
 export default {
   components: {
-    tabBar
+    tabBar,
+    organCard,
+    organCardLeft,
+    organCardCenter
+  },
+  data () {
+    return {
+      list: [
+        {
+          id: '1',
+          logo: '../../static/images/img1.png',
+          title: '武汉红十字会',
+          grant_count: 8991212,
+          link: '/pages/mine/main'
+        },
+        {
+          id: '2',
+          logo: '../../static/images/img1.png',
+          title: '壹基金',
+          grant_count: 1213234
+        },
+        {
+          id: '3',
+          logo: '../../static/images/img1.png',
+          title: '韩红基金',
+          grant_count: 243
+        },
+        {
+          id: '4',
+          logo: '../../static/images/img1.png',
+          title: '水滴基金',
+          grant_count: 628
+        },
+        {
+          id: '5',
+          logo: '../../static/images/img1.png',
+          title: '壹基金',
+          grant_count: 1213234
+        }
+      ],
+      organ: {
+        id: '5',
+        logo: '../../static/images/img1.png',
+        title: '壹基金',
+        grant_count: 1213234,
+        income: {
+          goods: 1212234,
+          capital: 3434341
+        },
+        disburse: {
+          goods: 3434341,
+          capital: 1212234
+        }
+      }
+    }
+  },
+  onShow () {
+    this.getOrganizationList()
+  },
+  methods: {
+    getOrganizationList () {
+      // TODO 获取组织机构列表
+      console.log('获取组织机构列表')
+    }
   }
 }
 </script>
@@ -19,5 +98,14 @@ export default {
 @import "@/style/common.scss";
 .home-container{
   padding-bottom: $tabbar-height;
+  .organization-container{
+    white-space: nowrap;
+    overflow-x: scroll;
+    padding: 20rpx 0;
+    .item{
+      display: inline-block;
+      margin: 0 24rpx;
+    }
+  }
 }
 </style>
