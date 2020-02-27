@@ -42,7 +42,7 @@ export default {
       this.renderTableByCurrent()
     },
     renderTableByCurrent () {
-      const {current, tabList} = this
+      const { current, tabList } = this
 
       let content = []
       switch (current) {
