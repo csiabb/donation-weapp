@@ -14,6 +14,10 @@
     </scroll-view>
     <organ-card-left type="icon-left" :info="organ" />
     <organ-card-center type="icon-center" :info="organ" />
+    <space/>
+    <div class="header-container">
+      <cell-list txt="捐赠者/机构公示" link="/pages/mine/main" icon="../../static/images/img1.png" />
+    </div>
     <tab-bar :selectNavIndex="0"></tab-bar>
   </div>
 </template>
@@ -23,13 +27,17 @@ import tabBar from '@/components/tabbar/tabBar'
 import organCard from '@/components/card/organCard'
 import organCardLeft from '@/components/card/organCardLeft'
 import organCardCenter from '@/components/card/organCardCenter'
+import cellList from '@/components/cell/cellList'
+import space from '@/components/space/space'
 
 export default {
   components: {
     tabBar,
     organCard,
     organCardLeft,
-    organCardCenter
+    organCardCenter,
+    cellList,
+    space
   },
   data () {
     return {
@@ -106,6 +114,9 @@ export default {
       display: inline-block;
       margin: 0 24rpx;
     }
+  }
+  .header-container{
+    padding: 0 30rpx;
   }
 }
 </style>
