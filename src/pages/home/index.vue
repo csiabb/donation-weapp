@@ -1,5 +1,8 @@
 <template>
   <div class="home-container">
+    <div class="header-container">
+      <cell-list txt="公益机构" link="/pages/mine/main"/>
+    </div>
     <scroll-view scroll-x="true" bindscroll="scroll" style="width: 100%">
       <div class="organization-container" >
         <div 
@@ -12,11 +15,9 @@
         </div>
       </div>
     </scroll-view>
-    <organ-card-left type="icon-left" :info="organ" />
-    <organ-card-center type="icon-center" :info="organ" />
     <space/>
     <div class="header-container">
-      <cell-list txt="捐赠者/机构公示" link="/pages/mine/main" icon="../../static/images/img1.png" />
+      <cell-list txt="捐赠者/机构公示" link="/pages/mine/main"/>
     </div>
     <tab-bar :selectNavIndex="0"></tab-bar>
   </div>
@@ -109,7 +110,7 @@ export default {
   .organization-container{
     white-space: nowrap;
     overflow-x: scroll;
-    padding: 20rpx 0;
+    padding: 10rpx 0 30rpx 0;
     .item{
       display: inline-block;
       margin: 0 24rpx;
