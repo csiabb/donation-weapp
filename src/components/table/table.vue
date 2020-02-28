@@ -32,6 +32,7 @@ export default {
 
 <style lang="scss">
 ul.table_component {
+  overflow-y: hidden;
   ul.table_header {
     display: flex;
     align-items: flex-start;
@@ -54,6 +55,7 @@ ul.table_component {
     align-items: flex-start;
     justify-content: space-between;
     height: 80rpx;
+    border-bottom: 1rpx solid #ddd;
     > li{
       height: 80rpx;
       line-height: 80rpx;
@@ -65,7 +67,6 @@ ul.table_component {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      border-bottom: 1rpx solid #ddd;
       &:first-child{
         margin-left: 0;
       }
