@@ -52,6 +52,10 @@ $font-color-717171: #717171;;
   display: flex;
   flex-direction: row;
   align-items: center;
+  div{
+    font-size: $font-size-30;
+    font-weight: $font-weight-400;
+  }
   .icon{
     width: 52rpx;
     height: 52rpx;
@@ -64,7 +68,6 @@ $font-color-717171: #717171;;
     width: 36rpx;
     height: 36rpx;
     transform: translate(0, -50%);
-    font-size: $font-size-30;
     .arrow-icon{
       width: 100%;
       height: 100%;
