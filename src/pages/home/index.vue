@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <div class="header-container">
-      <cell-list txt="公益机构" link="/pages/mine/main"/>
+      <cell-list txt="公益机构" link="/pages/organList/main"/>
     </div>
     <scroll-view scroll-x="true" bindscroll="scroll" style="width: 100%">
       <div class="organization-container" >
