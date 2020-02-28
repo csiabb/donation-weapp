@@ -49,7 +49,7 @@ export default {
         case 0:
         default:
           content = [
-            [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
+            [tabList[current], '0', '100,000', '韩红基金', '2020/02/02 13:00:26'],
             [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26']
           ]
           break
