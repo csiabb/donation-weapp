@@ -1,5 +1,8 @@
 <template>
   <div class="home-container">
+    <div class="header-container">
+      <cell-list txt="公益机构" link="/pages/mine/main"/>
+    </div>
     <scroll-view scroll-x="true" bindscroll="scroll" style="width: 100%">
       <div class="organization-container" >
         <div 
@@ -12,11 +15,22 @@
         </div>
       </div>
     </scroll-view>
-    <organ-card-left type="icon-left" :info="organ" />
-    <organ-card-center type="icon-center" :info="organ" />
     <space/>
     <div class="header-container">
-      <cell-list txt="捐赠者/机构公示" link="/pages/mine/main" icon="../../static/images/img1.png" />
+      <cell-list txt="捐赠者/机构公示" link="/pages/publicDisplayDetail/main"/>
+    </div>
+    <div class="table-container">
+      <div class="table-header">
+        <tab-menu 
+          :tabList="tabList" 
+          :current='current'
+          @onTabChange='onTabMenuChange'
+        ></tab-menu>
+      </div>
+      <table-component
+        :headers='headers'
+        :content='content'
+      ></table-component>
     </div>
     <tab-bar :selectNavIndex="0"></tab-bar>
   </div>
@@ -25,22 +39,26 @@
 <script>
 import tabBar from '@/components/tabbar/tabBar'
 import organCard from '@/components/card/organCard'
-import organCardLeft from '@/components/card/organCardLeft'
-import organCardCenter from '@/components/card/organCardCenter'
 import cellList from '@/components/cell/cellList'
 import space from '@/components/space/space'
+import tabMenu from '@/components/tabMenu/tabMenu'
+import table from '@/components/table/table'
 
 export default {
   components: {
     tabBar,
     organCard,
-    organCardLeft,
-    organCardCenter,
     cellList,
-    space
+    space,
+    tabMenu,
+    'table-component': table
   },
   data () {
     return {
+      current: 0,
+      tabList: ['个人捐赠', '机构捐赠'],
+      headers: ['分发者', '物资', '数量', '受赠者', '公示时间'],
+      content: [],
       list: [
         {
           id: '1',
@@ -92,11 +110,31 @@ export default {
   },
   onShow () {
     this.getOrganizationList()
+    this.renderTableByCurrent()
   },
   methods: {
     getOrganizationList () {
       // TODO 获取组织机构列表
       console.log('获取组织机构列表')
+    },
+    onTabMenuChange (index) {
+      this.current = index
+      this.renderTableByCurrent()
+    },
+    renderTableByCurrent () {
+      const { current, tabList } = this
+
+      let content = []
+      switch (current) {
+        case 0:
+        default:
+          content = [
+            [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
+            [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26']
+          ]
+          break
+      }
+      this.content = content
     }
   }
 }
@@ -109,7 +147,7 @@ export default {
   .organization-container{
     white-space: nowrap;
     overflow-x: scroll;
-    padding: 20rpx 0;
+    padding: 10rpx 0 30rpx 0;
     .item{
       display: inline-block;
       margin: 0 24rpx;
@@ -117,6 +155,12 @@ export default {
   }
   .header-container{
     padding: 0 30rpx;
+  }
+  .table-container{
+    padding: 0 30rpx 30rpx 20rpx;
+  }
+  .table-header{
+    padding: 0 160rpx;
   }
 }
 </style>
