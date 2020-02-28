@@ -38,9 +38,11 @@ ul.table_component {
     align-items: flex-start;
     justify-content: space-between;
     height: 76rpx;
-    border-top: 1rpx solid #ddd;
-    border-bottom: 1rpx solid #ddd;
+    // border-top: 1rpx solid #ddd;
+    // border-bottom: 1rpx solid #ddd;
     > li {
+      border-top: 1rpx solid #ddd;
+      border-bottom: 1rpx solid #ddd;
       height: 76rpx;
       line-height: 76rpx;
       width: 200rpx;
@@ -55,12 +57,13 @@ ul.table_component {
     align-items: flex-start;
     justify-content: space-between;
     height: 80rpx;
-    border-bottom: 1rpx solid #ddd;
+   
     > li{
+      border-bottom: 1rpx solid #ddd;
       height: 80rpx;
       line-height: 80rpx;
       width: 160rpx;
-      margin-left: 40rpx;
+      padding-left: 40rpx;
       flex-shrink: 0;
       font-size: 28rpx;
       color: #3A3A3A;
@@ -68,7 +71,7 @@ ul.table_component {
       white-space: nowrap;
       text-overflow: ellipsis;
       &:first-child{
-        margin-left: 0;
+        padding-left: 0;
       }
     }
 
