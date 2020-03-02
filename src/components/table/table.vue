@@ -57,7 +57,7 @@ ul.table_component {
     align-items: flex-start;
     justify-content: space-between;
     height: 80rpx;
-    border-bottom: 1rpx solid #ddd;
+   
     > li{
       border-bottom: 1rpx solid #ddd;
       height: 80rpx;
