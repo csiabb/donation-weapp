@@ -43,6 +43,7 @@ import cellList from '@/components/cell/cellList'
 import space from '@/components/space/space'
 import tabMenu from '@/components/tabMenu/tabMenu'
 import table from '@/components/table/table'
+import { pubList } from '@/api/home'
 
 export default {
   components: {
@@ -116,6 +117,12 @@ export default {
     getOrganizationList () {
       // TODO 获取组织机构列表
       console.log('获取组织机构列表')
+      const query = {
+        user_type: 'org'
+      }
+      pubList(query).then(resp => {
+        console.log(resp)
+      })
     },
     onTabMenuChange (index) {
       this.current = index
