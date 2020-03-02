@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/donationDetail/main",
     "pages/publicDisplayDetail/main",
     "pages/home/main",
-    "pages/publicDisplayDetail/main",
     "pages/mine/main",
     "pages/organList/main"
   ],
