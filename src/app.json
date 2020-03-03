@@ -1,7 +1,7 @@
 {
-  "pages": [
-    "pages/donationDetail/main",
+  "pages": [    
     "pages/publicDisplayDetail/main",
+    "pages/donationDetail/main",
     "pages/home/main",
     "pages/mine/main",
     "pages/organList/main"

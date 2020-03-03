@@ -9,6 +9,7 @@
     <table-component
       :headers='headers'
       :content='content'
+      :onRowClick='onRowClick'
     ></table-component>
   </div>
   
@@ -18,6 +19,8 @@
 <script>
 import tabMenu from '@/components/tabMenu/tabMenu'
 import table from '@/components/table/table'
+import { formatMoney } from '../../utils/index.js'
+import {get} from '../../api/index.js'
 
 export default {
   components: {
@@ -35,11 +38,31 @@ export default {
   },
   mounted () {
     this.renderTableByCurrent()
+    this.getTableList()
   },
   methods: {
     onTabMenuChange (index) {
       this.current = index
       this.renderTableByCurrent()
+    },
+    onRowClick (index) {
+      console.log(index)
+    },
+    getTableList () {
+      get(`/pub/supplies/query?limit=50&uid=`).then(({code, data, msg}) => {
+        if (code !== 0) { return wx.showToast(msg) }
+        const {results} = data
+        const _content = results.map(item => this.formatListItem(item))
+        console.log(_content)
+        this.content = _content
+      })
+    },
+    formatListItem (listItem) {
+      const {uid, name, number, unit, aid_uid: aidUid, create_at: time} = listItem
+      return {
+        data: [uid, name, `${number} ${unit}`, aidUid, time],
+        id: listItem.id
+      }
     },
     renderTableByCurrent () {
       const { current, tabList } = this
@@ -49,8 +72,14 @@ export default {
         case 0:
         default:
           content = [
-            [tabList[current], '0', '100,000', '韩红基金', '2020/02/02 13:00:26'],
-            [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26']
+            {
+              data: [tabList[current], '0', formatMoney(100000), '韩红基金', '2020/02/02 13:00:26'],
+              id: 1
+            },
+            {
+              data: [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
+              id: 2
+            }
           ]
           break
       }
