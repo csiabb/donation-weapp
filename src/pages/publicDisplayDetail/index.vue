@@ -37,6 +37,7 @@ export default {
     }
   },
   mounted () {
+    console.log(this.$root.$mp.query)
     this.renderTableByCurrent()
     this.getTableList()
   },
@@ -45,8 +46,10 @@ export default {
       this.current = index
       this.renderTableByCurrent()
     },
-    onRowClick (index) {
-      console.log(index)
+    onRowClick (id) {
+      wx.navigateTo({
+        url: `/pages/donationDetail/main?id=${id}`
+      })
     },
     getTableList () {
       get(`/pub/supplies/query?limit=50&uid=`).then(({code, data, msg}) => {
