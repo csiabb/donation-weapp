@@ -81,7 +81,7 @@
       <h1>物流信息</h1>
       <view class="transporter_detail">
         <span>运单号</span>
-        <span>192848484494949440</span>
+        <span>{{transporterNum}}</span>
       </view>
     </view>
   </view>
@@ -106,7 +106,8 @@ export default {
     blockTime: String,
     blockHeight: String | Number,
     blockId: String,
-    images: Array
+    images: Array,
+    transporterNum: String
 
   },
   data () {

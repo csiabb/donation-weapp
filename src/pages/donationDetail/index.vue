@@ -13,6 +13,8 @@
   :blockHeight='blockHeight'
   :blockId='blockId'
   :images='images'
+  :transporterNum='transporterNum'
+  :receiverAccount='receiverAccount'
   ></donation-detail-list>
 </div>
 </template>
@@ -36,6 +38,8 @@ export default {
       suppliesCount: '',
       senderAddress: '',
       receiverAddress: '',
+      receiverAccount: '',
+      transporterNum: '',
       time: '',
       blockTime: '',
       blockHeight: '',
@@ -72,7 +76,9 @@ export default {
             donor_name: donorName,
             amount,
             aid_name: aidName,
-            created_at: time
+            created_at: time,
+
+            target_bank_card_num: receiverAccount
           } = {},
           billing_addr: {
             province, city, district
@@ -82,6 +88,7 @@ export default {
           } = {},
           proof_images: images
         } = data
+        this.receiverAccount = receiverAccount
         this.suppliesName = suppliesName
         this.suppliesCount = `${formatMoney(amount)} 元`
         this.donorName = donorName
@@ -110,7 +117,8 @@ export default {
             number,
             unit,
             aid_name: aidName,
-            created_at: time
+            created_at: time,
+            way_bill_num: transporterNum
           } = {},
           billing_addr: {
             province, city, district
@@ -120,7 +128,8 @@ export default {
           } = {},
           proof_images: images
         } = data
-        console.log(data)
+
+        this.transporterNum = transporterNum
         this.suppliesName = suppliesName
         this.suppliesCount = `${formatMoney(number)} ${unit}`
         this.donorName = donorName
