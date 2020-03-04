@@ -22,13 +22,50 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"gamePlugin": {
 			"current": -1,
 			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "pages/organDetail/main",
+					"pathName": "pages/organDetail/main",
+					"query": "id=uid_charity_2&count=236,000-4,300-32,450-2,300",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "pages/organDetail/main",
+					"pathName": "pages/organDetail/main",
+					"query": "id=dsid_charity_1",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "pages/organDetail/main",
+					"pathName": "pages/organDetail/main",
+					"query": "id=uid_charity_4",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/organDetail/main",
+					"pathName": "pages/organDetail/main",
+					"query": "id=uid_charity_4",
+					"scene": null
+				}
+			]
 		}
 	}
 }

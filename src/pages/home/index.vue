@@ -11,7 +11,7 @@
           :index="index"
           :key="index"
         >
-          <organ-card :info="item" />
+          <organ-card :info="item" :link="'/pages/organDetail/main?id=' + item.id + '&count='+ item.receive.supplies + '-' + item.receive.funds + '-' + item.distribute.supplies+ '-' + item.distribute.funds" />
         </div>
       </div>
     </scroll-view>
@@ -30,6 +30,7 @@
       <table-component
         :headers='headers'
         :content='content'
+        :onRowClick='onRowClickHandle'
       ></table-component>
     </div>
     <tab-bar :selectNavIndex="0"></tab-bar>
@@ -44,6 +45,8 @@ import space from '@/components/space/space'
 import tabMenu from '@/components/tabMenu/tabMenu'
 import table from '@/components/table/table'
 import { pubList } from '@/api/home'
+import { orgCharities } from '@/api/organ'
+import { formatTime, formatMoney } from '@/utils/index'
 
 export default {
   components: {
@@ -58,54 +61,12 @@ export default {
     return {
       current: 0,
       tabList: ['个人捐赠', '机构捐赠'],
-      headers: ['分发者', '物资', '数量', '受赠者', '公示时间'],
+      headers: ['捐赠者', '物资', '数量/金额', '受赠者', '公示时间'],
       content: [],
-      list: [
-        {
-          id: '1',
-          logo: '../../static/images/img1.png',
-          title: '武汉红十字会',
-          grant_count: 8991212,
-          link: '/pages/mine/main'
-        },
-        {
-          id: '2',
-          logo: '../../static/images/img1.png',
-          title: '壹基金',
-          grant_count: 1213234
-        },
-        {
-          id: '3',
-          logo: '../../static/images/img1.png',
-          title: '韩红基金',
-          grant_count: 243
-        },
-        {
-          id: '4',
-          logo: '../../static/images/img1.png',
-          title: '水滴基金',
-          grant_count: 628
-        },
-        {
-          id: '5',
-          logo: '../../static/images/img1.png',
-          title: '壹基金',
-          grant_count: 1213234
-        }
-      ],
-      organ: {
-        id: '5',
-        logo: '../../static/images/img1.png',
-        title: '壹基金',
-        grant_count: 1213234,
-        income: {
-          goods: 1212234,
-          capital: 3434341
-        },
-        disburse: {
-          goods: 3434341,
-          capital: 1212234
-        }
+      list: [],
+      listQuery: {
+        page_num: 1,
+        page_limit: 50
       }
     }
   },
@@ -116,12 +77,33 @@ export default {
   methods: {
     getOrganizationList () {
       // TODO 获取组织机构列表
-      console.log('获取组织机构列表')
       const query = {
-        user_type: 'org'
+        page_num: 1,
+        page_limit: 10
       }
-      pubList(query).then(resp => {
-        console.log(resp)
+      orgCharities(query).then(resp => {
+        if (resp.code === 0) {
+          const data = resp.data.results && resp.data.results.length > 0 ? resp.data.results : []
+          const list = []
+          for (let i in data) {
+            const tmp = data[i]
+            list.push({
+              id: tmp.uid,
+              logo: tmp.url,
+              title: tmp.nick_name,
+              grant_count: tmp.distributed_supplies,
+              distribute: {
+                supplies: formatMoney(tmp.distributed_supplies),
+                funds: formatMoney(tmp.distributed_funds)
+              },
+              receive: {
+                supplies: formatMoney(tmp.received_supplies),
+                funds: formatMoney(tmp.received_funds)
+              }
+            })
+          }
+          this.list = list
+        }
       })
     },
     onTabMenuChange (index) {
@@ -129,19 +111,32 @@ export default {
       this.renderTableByCurrent()
     },
     renderTableByCurrent () {
-      const { current, tabList } = this
-
-      let content = []
-      switch (current) {
-        case 0:
-        default:
-          content = [
-            [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
-            [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26']
-          ]
-          break
+      const query = {
+        user_type: this.current === 0 ? 'normal' : 'org',
+        page_num: this.listQuery.page_num,
+        page_limit: this.listQuery.page_limit
       }
-      this.content = content
+      pubList(query).then(resp => {
+        if (resp.code === 0) {
+          const { results } = resp.data
+          const content = results.map(item => this.formatListItem(item))
+          this.content = content
+        }
+      })
+    },
+    formatListItem (listItem) {
+      const {donor_name: donorName, name, number, unit, aid_name: aidName, created_at: time} = listItem
+      return {
+        data: [donorName || '---', name, `${formatMoney(number)} ${unit}`, aidName || '---', formatTime(new Date(time * 1000))],
+        id: listItem.id,
+        type: 'supplies'
+      }
+    },
+    onRowClickHandle (id, type) {
+      console.log(id, type)
+      wx.navigateTo({
+        url: `/pages/donationDetail/main?id=${id}&type=${type}`
+      })
     }
   }
 }

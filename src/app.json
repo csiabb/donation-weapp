@@ -3,9 +3,9 @@
     "pages/home/main",
     "pages/publicDisplayDetail/main",
     "pages/donationDetail/main",
-
     "pages/mine/main",
-    "pages/organList/main"
+    "pages/organList/main",
+    "pages/organDetail/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -6,49 +6,60 @@
       :index="index"
       :key="index"
     >
-      <organ-card-left :info="item" />
+      <organ-card-left :info="item" :link="'/pages/organDetail/main?id=' + item.id + '&count='+ item.receive.supplies + '-' + item.receive.funds + '-' + item.distribute.supplies+ '-' + item.distribute.funds" />
     </div>
   </scroll-view>
 </template>
 
 <script>
 import organCardLeft from '@/components/card/organCardLeft'
+import { orgCharities } from '@/api/organ'
+import { formatMoney } from '@/utils/index'
 export default {
   components: {
     organCardLeft
   },
   data () {
     return {
-      list: [
-        {
-          id: '1',
-          logo: '../../static/images/img1.png',
-          title: '武汉红十字会',
-          grant_count: 8991212,
-          income: {
-            goods: 1212234,
-            capital: 3434341
-          },
-          disburse: {
-            goods: 3434341,
-            capital: 1212234
+      listQuery: {
+        page_num: 1,
+        page_limit: 50
+      },
+      list: []
+    }
+  },
+  onShow () {
+    this.getOrgCharities()
+  },
+  methods: {
+    getOrgCharities () {
+      const query = {
+        page_num: this.listQuery.page_num,
+        page_limit: this.listQuery.page_limit
+      }
+      orgCharities(query).then(resp => {
+        if (resp.code === 0) {
+          const data = resp.data.results && resp.data.results.length > 0 ? resp.data.results : []
+          const list = []
+          for (let i in data) {
+            const tmp = data[i]
+            list.push({
+              id: tmp.uid,
+              logo: tmp.url,
+              title: tmp.nick_name,
+              distribute: {
+                supplies: formatMoney(tmp.distributed_supplies),
+                funds: formatMoney(tmp.distributed_funds)
+              },
+              receive: {
+                supplies: formatMoney(tmp.received_supplies),
+                funds: formatMoney(tmp.received_funds)
+              }
+            })
           }
-        },
-        {
-          id: '2',
-          logo: '../../static/images/img1.png',
-          title: '壹基金',
-          grant_count: 1213234,
-          income: {
-            goods: 1212234,
-            capital: 3434341
-          },
-          disburse: {
-            goods: 3434341,
-            capital: 1212234
-          }
+          this.list = list
         }
-      ]
+      })
     }
   }
 }
