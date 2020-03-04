@@ -24,7 +24,41 @@ export function formatTime (date) {
   return `${t1} ${t2}`
 }
 
+export function formatMoney (money) {
+  let result = []
+  let count = 0
+  const _money = money.toString()
+  for (let i = _money.length - 1; i >= 0; i -= 1) {
+    if (count === 3) {
+      result.unshift(',')
+      count = 0
+    }
+    if (count !== 3) {
+      count += 1
+    }
+    result.unshift(_money[i])
+  }
+  return result.join('')
+}
+
+export function formatAccount (account) {
+  let result = []
+  let count = 0
+  const _account = account.toString()
+  for (let i = _account.length - 1; i >= 0; i -= 1) {
+    if (count === 3) {
+      result.unshift(' ')
+      count = 0
+    }
+    if (count !== 3) {
+      count += 1
+    }
+    result.unshift(_account[i])
+  }
+  return result.join('')
+}
+
 export default {
-  formatNumber,
-  formatTime
+  formatTime,
+  formatMoney
 }
