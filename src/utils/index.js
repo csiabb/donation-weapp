@@ -41,6 +41,23 @@ export function formatMoney (money) {
   return result.join('')
 }
 
+export function formatAccount (account) {
+  let result = []
+  let count = 0
+  const _account = account.toString()
+  for (let i = _account.length - 1; i >= 0; i -= 1) {
+    if (count === 3) {
+      result.unshift(' ')
+      count = 0
+    }
+    if (count !== 3) {
+      count += 1
+    }
+    result.unshift(_account[i])
+  }
+  return result.join('')
+}
+
 export default {
   formatTime,
   formatMoney

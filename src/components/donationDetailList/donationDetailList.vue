@@ -46,9 +46,13 @@
             <span>收件人</span>
             <span>{{aidName}}</span>
           </li>
-          <li>
+          <li v-if="type === 'supplies'">
             <span>收件地址</span>
             <span>{{receiverAddress}}</span>
+          </li>
+          <li v-if="type === 'money'">
+            <span>收款账号</span>
+            <span>{{receiverAccount}}</span>
           </li>
       </ul>
     </view>
@@ -57,13 +61,14 @@
       <h1>物资详情</h1>
       <ul class="donation_list">
         <li>
-          <span>{{suppliesName}}</span>
+          <span v-if="type === 'supplies'">{{suppliesName}}</span>
+          <span v-if="type === 'money'">资金</span>
           <span>{{suppliesCount}}</span>
         </li>
       </ul>
     </view>
 
-    <view class="donation_proof">
+    <view class="donation_proof" v-if='images && images.length > 0'>
       <h1>捐赠证明</h1>
       <ul class="proof_image_list">
         <li v-for='(img,index) in images' :key='index'>
@@ -96,6 +101,7 @@ export default {
     suppliesCount: String,
     senderAddress: String,
     receiverAddress: String,
+    receiverAccount: String,
     time: String,
     blockTime: String,
     blockHeight: String | Number,
