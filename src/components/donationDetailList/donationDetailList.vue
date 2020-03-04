@@ -6,18 +6,18 @@
         <ul>
           <li>
             <span>区块高度</span>
-            <span>353256514</span>
+            <span>{{blockHeight}}</span>
           </li>
           <li>
             <span>存证唯一标识</span>
-            <span>0xssdjflsiotjslkfsjdflksdjklsjfdkljk</span>
+            <span>{{blockId}}</span>
           </li>
           <li>
             <span>上链时间</span>
-            <span>2020-02-11 17：43：28</span>
+            <span>{{blockTime}}</span>
           </li>
         </ul>
-        <image :src="block_icon" class="block_icon"/>
+        <image :src="block_icon" class="block_icon" v-if='blockId'/>
       </view>
     </view>
 
@@ -26,15 +26,15 @@
       <ul class="sender_info_content">
         <li>
           <span>名称</span>
-          <span>周杰伦</span>
+          <span>{{donorName}}</span>
         </li>
         <li>
           <span>所在地区</span>
-          <span>北京市-西城区-展览路阳光大厦</span>
+          <span>{{senderAddress}}</span>
         </li>
         <li>
           <span>发布时间</span>
-          <span>2020-02-11 17:42:28</span>
+          <span>{{time}}</span>
         </li>
       </ul>
     </view>
@@ -44,11 +44,11 @@
         <ul class="receiver_info_content">
           <li>
             <span>收件人</span>
-            <span>韩红基金会</span>
+            <span>{{aidName}}</span>
           </li>
           <li>
             <span>收件地址</span>
-            <span>北京市-朝阳区-北新桥</span>
+            <span>{{receiverAddress}}</span>
           </li>
       </ul>
     </view>
@@ -57,8 +57,8 @@
       <h1>物资详情</h1>
       <ul class="donation_list">
         <li>
-          <span>3M N95口罩</span>
-          <span>2,000个</span>
+          <span>{{suppliesName}}</span>
+          <span>{{suppliesCount}}</span>
         </li>
       </ul>
     </view>
@@ -66,19 +66,13 @@
     <view class="donation_proof">
       <h1>捐赠证明</h1>
       <ul class="proof_image_list">
-        <li>
-          <image></image>
-        </li>
-        <li>
-          <image></image>
-        </li>
-        <li>
-          <image></image>
+        <li v-for='(img,index) in images' :key='index'>
+          <image :src='img.url'></image>
         </li>
       </ul>
     </view>
 
-    <view class="transporter_info">
+    <view class="transporter_info" v-if="type === 'supplies'">
       <h1>物流信息</h1>
       <view class="transporter_detail">
         <span>运单号</span>
@@ -90,12 +84,37 @@
 
 <script>
 
-export default{
+export default {
+  props: {
+    type: {
+      type: String,
+      required: true
+    },
+    donorName: String,
+    aidName: String,
+    suppliesName: String,
+    suppliesCount: String,
+    senderAddress: String,
+    receiverAddress: String,
+    time: String,
+    blockTime: String,
+    blockHeight: String | Number,
+    blockId: String,
+    images: Array
+
+  },
   data () {
     return {
       block_icon: '../../static/images/block_confirm_proof.png',
       sender_icon: '../../static/images/sender_icon.png',
-      receiver_icon: '../../static/images/receiver_icon.png'
+      receiver_icon: '../../static/images/receiver_icon.png',
+      suppliesName: ''
+    }
+  },
+  watch: {
+    suppliesName (_name) {
+      console.log(_name)
+      this.suppliesName = _name
     }
   }
 }
@@ -270,7 +289,6 @@ export default{
       > li image{
         width: 180rpx;
         height: 180rpx;
-        border: 1rpx solid red;
       }
     }
   }

@@ -19,7 +19,7 @@
 <script>
 import tabMenu from '@/components/tabMenu/tabMenu'
 import table from '@/components/table/table'
-import { formatMoney } from '../../utils/index.js'
+import { formatTime, formatMoney } from '../../utils/index.js'
 import {get} from '../../api/index.js'
 
 export default {
@@ -39,54 +39,62 @@ export default {
   mounted () {
     console.log(this.$root.$mp.query)
     this.renderTableByCurrent()
-    this.getTableList()
+    this.getTableList('supplies', 'donate')
   },
   methods: {
     onTabMenuChange (index) {
       this.current = index
       this.renderTableByCurrent()
     },
-    onRowClick (id) {
+    onRowClick (id, type) {
       wx.navigateTo({
-        url: `/pages/donationDetail/main?id=${id}`
+        url: `/pages/donationDetail/main?id=${id}&type=${type}`
       })
     },
-    getTableList () {
-      get(`/pub/supplies/query?limit=50&uid=`).then(({code, data, msg}) => {
+    getTableList (suppliesType, suppliesStatus) {
+      const urlMap = {
+        supplies: `/pub/supplies/query?limit=100&uid=&pub_type=${suppliesStatus}`,
+        money: `/pub/funds/query?limit=100&uid=&pub_type=${suppliesStatus}`
+      }
+      get(urlMap[suppliesType]).then(({code, data, msg}) => {
         if (code !== 0) { return wx.showToast(msg) }
         const {results} = data
-        const _content = results.map(item => this.formatListItem(item))
-        console.log(_content)
+        const _content = results.map(item => this.formatListItem(item, suppliesType))
+
         this.content = _content
       })
     },
-    formatListItem (listItem) {
-      const {uid, name, number, unit, aid_uid: aidUid, create_at: time} = listItem
+    formatListItem (listItem, suppliesType) {
+      if (suppliesType === 'supplies') {
+        const {donor_name: donorName, name, number, unit, aid_name: aidName = '---', created_at: time} = listItem
+        return {
+          data: [donorName, name, `${formatMoney(number)} ${unit}`, aidName || '---', formatTime(new Date(time * 1000))],
+          id: listItem.id,
+          type: 'supplies'
+        }
+      }
+      const {donor_name: donorName, amount, aid_name: aidName = '---', created_at: time} = listItem
       return {
-        data: [uid, name, `${number} ${unit}`, aidUid, time],
-        id: listItem.id
+        data: [donorName, '资金', formatMoney(amount), aidName || '---', formatTime(new Date(time * 1000))],
+        id: listItem.id,
+        type: 'money'
       }
     },
     renderTableByCurrent () {
-      const { current, tabList } = this
+      const { current } = this
 
-      let content = []
       switch (current) {
         case 0:
+          return this.getTableList('supplies', 'donate')
+        case 1:
+          return this.getTableList('money', 'donate')
+        case 2:
+          return this.getTableList('supplies', 'distribute')
+        case 3:
+          return this.getTableList('money', 'distribute')
         default:
-          content = [
-            {
-              data: [tabList[current], '0', formatMoney(100000), '韩红基金', '2020/02/02 13:00:26'],
-              id: 1
-            },
-            {
-              data: [tabList[current], '3M口罩', '100,000', '韩红基金', '2020/02/02 13:00:26'],
-              id: 2
-            }
-          ]
-          break
+          return null
       }
-      this.content = content
     }
   }
 }

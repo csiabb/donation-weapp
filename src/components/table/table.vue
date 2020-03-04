@@ -7,7 +7,7 @@
         </li>
       </ul>
     </li>
-    <ul v-for="(col, _index) in content" v-bind:key="_index" class="content_col" @click='onClick(col.id)'>
+    <ul v-for="(col, _index) in content" v-bind:key="_index" class="content_col" @click='onClick(col.id, col.type)'>
       <li v-for='(item, index) in col.data' v-bind:key="index">
         {{item}}
       </li>
@@ -32,8 +32,8 @@ export default {
     }
   },
   methods: {
-    onClick (id) {
-      this.onRowClick(id)
+    onClick (id, type) {
+      this.onRowClick(id, type)
     }
   }
   // watch: {

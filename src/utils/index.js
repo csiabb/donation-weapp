@@ -29,7 +29,7 @@ export function formatMoney (money) {
   let count = 0
   const _money = money.toString()
   for (let i = _money.length - 1; i >= 0; i -= 1) {
-    if (count === 3 && i !== 0) {
+    if (count === 3) {
       result.unshift(',')
       count = 0
     }
