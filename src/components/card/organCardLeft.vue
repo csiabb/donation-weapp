@@ -1,9 +1,9 @@
 <template>
   <div class="card-left-container">
-    <div class="card-content" @click="info.link ? goToLinkHandle(info.link) : ''">
+    <div class="card-content" @click="link ? goToLinkHandle(link) : ''">
       <div class="card-logo">
         <div class="logo">
-          <image :src="info.logo" />
+          <image :src="info.logo ? info.logo : '../../static/icons/logo.png'"  />
           <div>{{ info.title }}</div>
         </div>
         <image class="arrow-icon" src="../../static/icons/arrow-right-active.png" />
@@ -14,8 +14,8 @@
             <image src="../../static/icons/income.png" />
           </div>
           <div class="item-info">
-            <div>物品: {{ info.income.goods }}笔</div>
-            <div>资金: {{ info.income.capital }}元</div>
+            <div>物品: {{ info.receive.supplies }}笔</div>
+            <div>资金: {{ info.receive.funds }}元</div>
           </div>
         </div>
         <div class="item">
@@ -23,8 +23,8 @@
             <image src="../../static/icons/disburse.png" />
           </div>
           <div class="item-info">
-            <div>物品: {{ info.income.goods }}笔</div>
-            <div>资金: {{ info.income.capital }}元</div>
+            <div>物品: {{ info.distribute.supplies }}笔</div>
+            <div>资金: {{ info.distribute.funds }}元</div>
           </div>
         </div>
       </div>
@@ -38,6 +38,10 @@ export default {
     info: {
       type: Object,
       default: {}
+    },
+    link: {
+      type: String,
+      default: ''
     }
   },
   methods: {

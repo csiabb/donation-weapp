@@ -1,8 +1,8 @@
 <template>
   <div class="card-center-container">
-    <div class="card-content" @click="info.link ? goToLinkHandle(info.link) : ''">
+    <div class="card-content" @click="link ? goToLinkHandle(link) : ''">
       <div class="card-logo">
-        <image class="logo" :src="info.logo" />
+        <image class="logo" :src="info.logo ? info.logo : '../../static/icons/logo.png'" />
         <image class="arrow-icon" src="../../static/icons/arrow-right-active.png" />
       </div>
       <div class="card-info">
@@ -11,8 +11,8 @@
             <image src="../../static/icons/income.png" />
           </div>
           <div class="item-info">
-            <div>物品: <span>{{ info.income.goods }}笔</span></div>
-            <div>资金: <span>{{ info.income.capital }}元</span></div>
+            <div>物品: <span>{{ info.receive.supplies }}笔</span></div>
+            <div>资金: <span>{{ info.receive.funds }}元</span></div>
           </div>
         </div>
         <div class="item">
@@ -20,8 +20,8 @@
             <image src="../../static/icons/disburse.png" />
           </div>
           <div class="item-info">
-            <div>物品: <span class="active">{{ info.income.goods }}笔</span></div>
-            <div>资金: <span class="active">{{ info.income.capital }}元</span></div>
+            <div>物品: <span class="active">{{ info.distribute.supplies }}笔</span></div>
+            <div>资金: <span class="active">{{ info.distribute.funds }}元</span></div>
           </div>
         </div>
       </div>
@@ -35,6 +35,10 @@ export default {
     info: {
       type: Object,
       default: {}
+    },
+    link: {
+      type: String,
+      default: ''
     }
   },
   methods: {
@@ -89,12 +93,12 @@ export default {
         flex-direction: row;
         align-items: center;
         image{
-          width: 54rpx;
-          height: 54rpx;
+          width: 64rpx;
+          height: 64rpx;
         }
         .item-icon{
           display: flex;
-          width: 64rpx;
+          width: 70rpx;
         }
         .item-info{
           display: flex;
