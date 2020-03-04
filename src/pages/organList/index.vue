@@ -6,7 +6,7 @@
       :index="index"
       :key="index"
     >
-      <organ-card-left :info="item" />
+      <organ-card-left :info="item" :link="'/pages/organDetail/main?id=' + item.id" />
     </div>
   </scroll-view>
 </template>

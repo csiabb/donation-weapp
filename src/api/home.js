@@ -9,3 +9,7 @@ import { get } from '@/api/index'
 export function pubList (params) {
   return get('/pub/list', params)
 }
+
+export function pubSupplies (params) {
+  return get('/pub/supplies', params)
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="card-center-container">
-    <div class="card-content" @click="info.link ? goToLinkHandle(info.link) : ''">
+    <div class="card-content" @click="link ? goToLinkHandle(link) : ''">
       <div class="card-logo">
         <image class="logo" :src="info.logo" />
         <image class="arrow-icon" src="../../static/icons/arrow-right-active.png" />
@@ -35,6 +35,10 @@ export default {
     info: {
       type: Object,
       default: {}
+    },
+    link: {
+      type: String,
+      default: ''
     }
   },
   methods: {
