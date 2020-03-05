@@ -53,8 +53,8 @@ export default {
     },
     getTableList (suppliesType, suppliesStatus) {
       const urlMap = {
-        supplies: `/pub/supplies/query?limit=100&uid=&pub_type=${suppliesStatus}`,
-        money: `/pub/funds/query?limit=100&uid=&pub_type=${suppliesStatus}`
+        supplies: `/pub/supplies?limit=100&uid=&pub_type=${suppliesStatus}`,
+        money: `/pub/funds?limit=100&uid=&pub_type=${suppliesStatus}`
       }
       get(urlMap[suppliesType]).then(({code, data, msg}) => {
         if (code !== 0) { return wx.showToast(msg) }

@@ -114,7 +114,8 @@ export default {
       const query = {
         user_type: this.current === 0 ? 'normal' : 'org',
         page_num: this.listQuery.page_num,
-        page_limit: this.listQuery.page_limit
+        page_limit: this.listQuery.page_limit,
+        pub_type: 'donate'
       }
       pubList(query).then(resp => {
         if (resp.code === 0) {
@@ -125,11 +126,19 @@ export default {
       })
     },
     formatListItem (listItem) {
-      const {donor_name: donorName, name, number, unit, aid_name: aidName, created_at: time} = listItem
-      return {
-        data: [donorName || '---', name, `${formatMoney(number)} ${unit}`, aidName || '---', formatTime(new Date(time * 1000))],
-        id: listItem.id,
-        type: 'supplies'
+      const {donor_name: donorName, type, name, amount, number, unit, aid_name: aidName, created_at: time} = listItem
+      if (type === 'supplies') {
+        return {
+          data: [donorName || '---', name, `${formatMoney(number)} ${unit}`, aidName || '---', formatTime(new Date(time * 1000))],
+          id: listItem.id,
+          type: 'supplies'
+        }
+      } else {
+        return {
+          data: [donorName || '---', '资金', formatMoney(amount), aidName || '---', formatTime(new Date(time * 1000))],
+          id: listItem.id,
+          type: 'money'
+        }
       }
     },
     onRowClickHandle (id, type) {
