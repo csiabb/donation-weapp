@@ -24,21 +24,34 @@ export function formatTime (date) {
   return `${t1} ${t2}`
 }
 
-export function formatMoney (money) {
-  let result = []
-  let count = 0
-  const _money = money.toString()
-  for (let i = _money.length - 1; i >= 0; i -= 1) {
-    if (count === 3) {
-      result.unshift(',')
-      count = 0
-    }
-    if (count !== 3) {
-      count += 1
-    }
-    result.unshift(_money[i])
+/*
+* 参数说明：
+* number：要格式化的数字
+* decimals：保留几位小数
+* decPoint：小数点符号
+* thousandsSep：千分位符号
+* */
+export function formatMoney (number, decimals, decPoint, thousandsSep) {
+  number = (number + '').replace(/[^0-9+-Ee.]/g, '')
+  let n = !isFinite(+number) ? 0 : +number
+  let prec = !isFinite(+decimals) ? 2 : Math.abs(decimals)
+  let sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep
+  let dec = (typeof decPoint === 'undefined') ? '.' : decPoint
+  let s = ''
+  let toFixedFix = function (n, prec) {
+    let k = Math.pow(10, prec)
+    return '' + Math.ceil(n * k) / k
   }
-  return result.join('')
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.')
+  let re = /(-?\d+)(\d{3})/
+  while (re.test(s[0])) {
+    s[0] = s[0].replace(re, '$1' + sep + '$2')
+  }
+  if ((s[1] || '').length < prec) {
+    s[1] = s[1] || ''
+    s[1] += new Array(prec - s[1].length + 1).join('0')
+  }
+  return s.join(dec)
 }
 
 export function formatAccount (account) {

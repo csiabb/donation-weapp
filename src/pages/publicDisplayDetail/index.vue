@@ -37,6 +37,7 @@ export default {
     }
   },
   mounted () {
+    console.log(this.$root.$mp.query)
     this.renderTableByCurrent()
     this.getTableList('supplies', 'donate')
   },
