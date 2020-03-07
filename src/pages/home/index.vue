@@ -5,7 +5,7 @@
     </div>
     <scroll-view scroll-x="true" bindscroll="scroll" style="width: 100%">
       <div class="organization-container" >
-        <div 
+        <div
           class="item"
           v-for="(item, index) in list"
           :index="index"
@@ -17,12 +17,12 @@
     </scroll-view>
     <space/>
     <div class="header-container">
-      <cell-list txt="捐赠者/机构公示" link="/pages/publicDisplayDetail/main"/>
+      <cell-list txt="捐赠者公示" link="/pages/publicDisplayDetail/main"/>
     </div>
     <div class="table-container">
       <div class="table-header">
-        <tab-menu 
-          :tabList="tabList" 
+        <tab-menu
+          :tabList="tabList"
           :current='current'
           @onTabChange='onTabMenuChange'
         ></tab-menu>
@@ -61,7 +61,7 @@ export default {
     return {
       current: 0,
       tabList: ['个人捐赠', '机构捐赠'],
-      headers: ['捐赠者', '物资', '数量/金额', '受赠者', '公示时间'],
+      headers: ['捐赠者', '物资', '数量/金额', '接收者', '公示时间'],
       content: [],
       list: [],
       listQuery: {

@@ -9,7 +9,7 @@
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-	"appid": "wxa37e499232c098ca",
+	"appid": "wxd26e9e819db97d18",
 	"projectname": "donation-weapp",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
