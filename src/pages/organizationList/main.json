@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "公益机构列表",
+  "usingComponents": {
+    "van-cell": "/static/vant/cell/index",
+    "van-icon": "/static/vant/icon/index"
+  }
+}
