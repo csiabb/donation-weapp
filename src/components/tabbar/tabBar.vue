@@ -1,23 +1,23 @@
 <template>
   <div class="tabbar-wrap" :class="isIphoneX? 'isIphoneX':''">
       <ul class="tabbar">
-        <li class="tabbar-item" v-for="(item, index) in navList" 
-          :key="index" 
+        <li class="tabbar-item" v-for="(item, index) in navList"
+          :key="index"
           @click="selectNavItem(index, item.pagePath)"
         >
           <block v-if="index === 1">
             <div class="tabbar-icon tabbar-icon-center">
-              <img 
-                alt="tabbar-icon" 
-                :src="selectNavIndex == index? item.selectedIconPath : item.iconPath" 
+              <img
+                alt="tabbar-icon"
+                :src="selectNavIndex == index? item.selectedIconPath : item.iconPath"
               >
             </div>
           </block>
           <block v-else>
             <div class="tabbar-icon" >
-              <img 
-                alt="tabbar-icon" 
-                :src="selectNavIndex == index? item.selectedIconPath : item.iconPath" 
+              <img
+                alt="tabbar-icon"
+                :src="selectNavIndex == index? item.selectedIconPath : item.iconPath"
               >
             </div>
             <div class="tabbar-text" :class="selectNavIndex == index? 'active':''">
@@ -39,19 +39,19 @@
         navList: [
           {
             'text': '首页',
-            'pagePath': '/pages/home/main',
-            'iconPath': '../../static/tabs/home.png',
-            'selectedIconPath': '../../static/tabs/home-active.png'
+            'pagePath': '/pages/homel/main',
+            'iconPath': '/static/tabs/home.png',
+            'selectedIconPath': '/static/tabs/home-active.png'
           }, {
             'text': '',
-            'pagePath': '/pages/home/main',
-            'iconPath': '../../static/tabs/center.png',
-            'selectedIconPath': '../../static/tabs/center.png'
+            'pagePath': '/pages/pub/main',
+            'iconPath': '/static/tabs/center.png',
+            'selectedIconPath': '/static/tabs/center.png'
           }, {
             'text': '我的',
             'pagePath': '/pages/mine/main',
-            'iconPath': '../../static/tabs/my.png',
-            'selectedIconPath': '../../static/tabs/my-active.png'
+            'iconPath': '/static/tabs/my.png',
+            'selectedIconPath': '/static/tabs/my-active.png'
           }
         ]
       }
@@ -122,7 +122,7 @@
           width: $tabbar-height;
           height: $tabbar-height;
         }
-      } 
+      }
       .tabbar-text{
         text-align: center;
         color: $default-text-color;
