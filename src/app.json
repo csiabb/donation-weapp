@@ -1,13 +1,26 @@
 {
-  "pages": [    
+  "pages": [
+    "pages/homel/main",
+    "pages/homelc/main",
+    "pages/pub/main",
+    "pages/pubm/main",
+    "pages/pubs/main",
     "pages/home/main",
+    "pages/summary/main",
+    "pages/organizationDetail/main",
+    "pages/organizationList/main",
+    "pages/promulgateList/main",
+    "pages/promulgateDetail/main",
     "pages/publicDisplayDetail/main",
     "pages/donationDetail/main",
-
     "pages/mine/main",
     "pages/organList/main",
     "pages/organDetail/main"
   ],
+  "pagesDesc": {
+    "pages/homel/main": "刘倩文的主页",
+    "pages/homelc/main": "刘倩文的主页,为了中间tab按钮的效果"
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#35CF82",
@@ -20,22 +33,32 @@
     "selectedColor": "#35CF82",
     "borderStyle": "white",
     "custom": true,
-    "list": [{
-      "text": "首页",
-      "pagePath": "pages/home/main",
-      "iconPath": "static/tabs/home.png",
-      "selectedIconPath": "static/tabs/home-active.png"
-    }, {
-      "text": "",
-      "pagePath": "pages/home/main",
-      "iconPath": "static/tabs/center.png",
-      "selectedIconPath": "static/tabs/center.png"
-    }, {
-      "text": "我的",
-      "pagePath": "pages/mine/main",
-      "iconPath": "static/tabs/my.png",
-      "selectedIconPath": "static/tabs/my-active.png"
-    }],
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/homel/main",
+        "iconPath": "static/tabs/home.png",
+        "selectedIconPath": "static/tabs/home-active.png"
+      },
+      {
+        "text": "",
+        "pagePath": "pages/pub/main",
+        "iconPath": "static/tabs/center.png",
+        "selectedIconPath": "static/tabs/center.png"
+      },
+      {
+        "text": "首页",
+        "pagePath": "pages/home/main",
+        "iconPath": "static/tabs/home.png",
+        "selectedIconPath": "static/tabs/home-active.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/mine/main",
+        "iconPath": "static/tabs/my.png",
+        "selectedIconPath": "static/tabs/my-active.png"
+      }
+    ],
     "position": "bottom"
   }
 }
